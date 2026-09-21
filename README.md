@@ -1,136 +1,44 @@
-## Práctica 1. Primeros pasos con OpenCV
+## Práctica 1. 
 
-### Contenidos
 
-[Instalación](#11-instalando-el-entorno-de-desarrollo)  
-[Anaconda](#111-comandos-basicos-de-anaconda)  
-[Mi carpeta](#112-el-environment-en-otra-carpeta)  
-[Spec-list](#113-un-environment-para-varias-practicas)  
-[Aspectos cubiertos](#12-aspectos-cubiertos)  
+### TAREA1 :Sin herramientas de IA, crea una imagen, p.e. de 800x800 píxeles, con la textura del tablero de ajedrez. Una vez resuelto de forma manual, resuelve la misma tarea usando un asistente de IA de tu elección (Claude, ChatGPT, Copilot, etc.). Compara ambas versiones en el informe de la práctica.
 
-### 1.1. Instalando el entorno de desarrollo  
+    Para la primera tarea lo que se ha realizado es lo siguiente:
 
-Si bien tienen libertad para seleccionar el entorno de desarrollo, la opción escogida para mostrar
-los distintos ejemplos en el laboratorio con Python desde Windows ha sido [Anaconda](https://www.anaconda.com). Anaconda permite crear distintos *environments*, cada uno con sus paquetes particulares y versiones específicas instaladas, pudiendo desde [Visual Studio Code](https://code.visualstudio.com) ejecutar un cuaderno concreto escogiendo el *environment* que interese. Para las personas que prefieran no utilizar Windows, comentarles que nuestra experiencia en Linux con [Miniconda](https://docs.conda.io/projects/miniconda/en/latest/miniconda-install.html) ha sido similar.
+    - se establecen los pixeles que van a ocupar, que en este caso son 800, y cuadra perfectamente ya que el tablero de ajedrez tiene 8 filas y columna, por lo que cada "cuadrado" del tablero ocuparan 100 pixeles
 
-Los equipos del laboratorio ya cuentan con Anaconda y VS Code instalados, si bien no completamente configurados para ejecutar el cuaderno de esta práctica. Conocida esta circunstancia, para poder ejecutar un primer cuaderno proporcionado tras contar en el equipo con la instalación de Anaconda y VS Code, los pasos a realizar son:
+    - luego creamos una imagen totalmente negra, del tamaño del tablero de ajedrez y asi nos permite solo tener que pintar los "cuadrados" blancos del tablero
 
-- Lanzar *Anaconda Prompt*
+    - hacemos un bucle for de 8 y recorremos por filas, si el numero de la fila que esta es par, pintamos el primer cuadrado y luego de forma salteada, y si es impar, pues al contrario, el primero no lo pintamos, y pintamos de forma salteada a partir del segundo
 
-- Crear el *environment* con la configuración que nos interese. Para crear uno que ejecute el cuaderno de esta primera práctica, sin darle muchas vueltas con una versión reciente de Python, se les propone lo siguiente:
+    - pintamos todo el tablero por ultimo
 
-```
-conda create --name VC_P1 python=3.11.5
-```
 
-Observen que crea el *environment* denominado *VC_P1* con una versión de Python en particular. Sustituye *VC_P1* por el nombre que decidas. Tras crearlo, y activarlo, instala un par de paquetes adicionales (recuerda sustituir *VC_P1* por el nombre que hayas escogido):
+### TAREA 1 CON IA
 
-```
-conda activate VC_P1
-pip install opencv-python
-pip install matplotlib
-```
+    la diferencia básicamente es que, lo que yo he realizado con un bucle for, Gemini en este caso, lo realiza directamente al crear un tablero y modifica las filas y columnas para pintar directamente ( no tengo captura de gemini para este ejercicio)
 
-NOTA: Para aquellas personas que quieren trabajar bajo Windows, tienen disponible en la sección 1.1.2, la descripción de creación de un *environment* con más paquetes que tendrá vida útil para varias prácticas, si bien con una versión previa de Python. No es estrictamente necesario, y puede dar algún quebradero de cabeza.
+### TAREA 1 conclusión
 
-Una vez que ya está el *environment* creado:
+    Gemini, en este caso, lo realiza de forma más elegante y sin ningún bucle for, a esto se le conoce como indexación con saltos, según gemini, y con interpolation 'nearest' también hace que los bordes no se difuminen y se vean mas nítidos
 
-- Descargar los archivos disponibles en github
 
-- Colocarse en la carpeta *P1*, correspondiente a la práctica 1
+### TAREA 2:  Crear una imagen estilo Mondrian (un ejemplo https://www3.gobiernodecanarias.org/medusa/ecoescuela/sa/2017/04/17/descubriendo-a-mondrian/) con las funciones de dibujo de OpenCV. No hagas uso de herramientas de IA, parte del ejemplo anterior.
 
-- Lanzar VS Code (en el PC del laboratorio disponible en el escritorio)
-
-- Instalar la extensión de Python en VS Code. Desde el [enlace](https://code.visualstudio.com/docs/languages/python) con VS Code abierto debería llevar al [enlace](https://marketplace.visualstudio.com/items?itemName=ms-python.python) en el *Marketplace*
-
-- Abrir el cuaderno de la práctica en VS Code (si el doble clic no va, puedes abrir el archivo desde VC Code)
-
-- Con el cuaderno abierto, en la parte superior derecha aparece *Select Kernel*. Tras picar deberías poder escoger el *environment*
-
-- Si no funcionara lo anterior, se hace necesario lanzar su *Command Palette* con la combinación *CTRL+SHIT+Palette*. Desde ella selecciona el *environment* recientemente creado, tecleando *Python: Seleccionar intérprete*, escogiendo el que nos interesa, el *environment* *VC_P1*. En caso de no aparecer, a pesar de  haber sido creado, en algunos equipos ha sido necesario cerrar y volver a lanzar VS Code.
-
-- En algunas máquinas al intentar el comando anterior, ha aparecido un error con algo como *interpreter not found*. Se ha resuelto seleccionando en la parte inferior izquierda el modo *Trust* en lugar de *Restricted*.
-
-- Una vez llegados a este punto, la primera ejecución de un cuaderno probablemente produzca un error, ya que es necesario instalar *ipykernel* con elementos para el uso de los cuadernos. Si no funciona de forma automática, VS Code dará error y sugerirá lanzar desde línea de comando (en ocasiones hemos tenido que lanzarlo desde el environment *base*):
-
-```
-conda install -n ENV_NAME ipykernel --update-deps --force-reinstall
-```
-
-- Llegados a este punto, ya debería ser posible ejecutar el cuaderno de esta primera práctica. Cruzo los dedos, y veremos las variantes con las que se encuentran ustedes.
-
-#### 1.1.1. Comandos básicos de Anaconda
-
-En el proceso de creación del *environment* pueden surgir errores, quizás necesitemos eliminarlo, crearlo de  nuevo, listar los existentes, etc.. Un muy breve resumen de comandos frecuentes:
-
-```
-conda info --envs # Lista environments existentes
-conda remove --name ENV_NAME --all # Elimina el environment ENV_NAME
-conda list --explicit > spec-file.txt   # genera un txt con los elementos presentes en el environment activado
-```
+    en esta tarea, se ha realizado un cuadro estilo Mondrian, y siguiendo las instrucciones, seguí el ejemplo anterior y realize varios rectángulos de diferentes colores (blanco, rojo, azul y amarillo), aprovechando, que el fondo es negro, para no tener que dibujarlo y siempre dejando, en mi caso 25px de distancia entre rectángulos y el borde, lo mas complicado del ejercicio era saber donde estabas pintando y asegurarse de no pintar encima de otro rectángulo y dejar el espacio suficiente entre ellos
 
 
 
-#### 1.1.2. El environment en otra carpeta
+### TAREA 3 Pintar círculos en las posiciones del píxel más claro y oscuro de cada fotograma captado por la cámara. ¿Funciona de forma fluida o a saltos? En el segundo caso, ¿podrías acelerarlo? Si haces uso de herramientas de IA, incluye la conversación.
+
+    para este ejercicio, me he fijado en otros ejercicios que ya estaban y he reutilizado una parte, ya que lo que hago en este ejercicio es bastante simple, recorro todos los pixeles de la pantalla con un doble bucle for, y en cada pixel saco el numero de los colores que tienen en RGB, y luego los sumo en una variable brillo, luego hago dos if, para saber si es mas grande o mas pequeño de todos los vistos y guardo su posición y por ultimo los pintos con un cv2.circle azul para el mas brillante y negro para el mas oscuro. Como no se me ocurría una forma de hacerlo que fuera sin dar tirones le pregunte directamente a gemini, para saber la respuesta y básicamente, hay que convertir la imagen a escala de grises, y que también hay funciones que devuelven los valores máximos y mínimos de grises, el código propuesto por gemini es mucho mas compacto y mejor optimizado
+    https://share.gemini.google/fW6pMercBeAL
+    y no realizo ningún cambio al mio, ya que fue lo que se me ocurrió hacer a mi, y la otra respuesta esta dentro del enlace
 
 
-Tener presente que en el laboratorio, si trabajas con el ordenador del aula, el rearranque borra directorios locales, por lo que los *environments* creados localmente, desaparecen. Puede interesar por ello crearlo en una carpeta local que no se limpie, como */pub/tmp*, en un disco externo o *pen* propio con *--prefix flag*.
-Para crear el *environment* de la subsección previa en una carpeta concreta en el PC, he procedido con los siguientes comandos:
-
-```
-conda create --prefix c:/pub/tmp/JPA/FACES --file spec-list.txt python=3.7.3
-conda activate c:/pub/tmp/JPA/FACES
-pip install imutils scikit-learn matplotlib
-```
 
 
-Si algo hubiera ido mal y quisieras eliminar el *environment* para empezar de nuevo, recordar los comandos del apartado 1.1.1
+### TAREA 4:TAREA: Llevar a cabo una propuesta propia de pop art. Incluye fuentes consultadas. Si haces uso de herramientas de IA, incluye la conversación.
 
-
-#### 1.1.3. Un environment para varias prácticas
-
-En ocasiones puede ser necesario clonar un *environment* en otro equipo. Una posibilidad es exportando la lista de requisitos, y proceder a su instalación en el otro equipo. Reproduzco la instalación que está en funcionamiento en mi equipo portátil en su partición bajo Windows (no funcionará con otros sistemas operativos). Hace uso de la versión Python 3.7.3, e incluye
-paquetes no necesarios en las primeras prácticas. En el caso de querer adoptarla, sugiero sustituir *ENV_NAME* por un nombre de tu elección. En el caso de trabajar en otro sistema operativo, evitar incluir *spec-list.txt* e ir añadiendo los paquetes que vayan siendo necesarios.
-
-```
-conda create --name ENV_NAME python=3.7.3 --file spec-list.txt
-```
-
-El comando anterior puede requerir unos minutos. A continuación se activa el *environment*
-
-```
-conda activate ENV_NAME
-```
-
-Y se instala algún paquete adicional necesario
-
-```
-pip install imutils scikit-learn matplotlib
-```
-
-
-### 1.2. Aspectos cubiertos y entrega
-
-El objetivo de esta práctica en primer término es poder ejecutar el cuaderno proporcionado en nuestro propio equipo o el del laboratorio. Este primer cuaderno (*VC_P1.ipynb*) debe servir para comprender de forma aplicada la representación de imágenes de grises y color, su modificación, visualización y tratamiento básico. Al finalizar la práctica, debes ser capaz de crear una imagen de un determinado tamaño,
-acceder a los valores asociados a un determinado píxel, modificar dichos valores, dibujar primitivas gráficas básicas sobre una imagen, abrir una imagen de disco, así como acceder a los fotogramas de un vídeo o captura de cámara. Para todo ello, se proponen varias tareas (espero no dejarme ninguna atrás aquí, en cualquier caso, la fuente fiable es el cuaderno):
-
-- Crear una imagen con la textura de un tablero de ajedrez
-- Hacer uso de las funciones de dibujo de OpenCV para crear una imagen estilo Mondrian como por ejemplo la mostrada a continuación:
-
-![Mondrian](https://images.squarespace-cdn.com/content/v1/5f638d3adfa9c677cced1579/1602089211975-ONZ6AALHOOPRVT7Z5ALL/Composición+en+rojo%2C+amarillo+y+azul.jpg?format=500w)  
-*Piet Mondrian, "Composición con rojo, amarillo y azul" (1930).*
-
-- Destacar tanto el píxel con el color más claro como con el color más oscuro de una imagen
-- Hacer una propuesta pop art con la entrada de la cámara web o vídeo
-
-La **entrega del cuaderno o cuadernos** con la resolución de tareas propuestas e imágenes resultantes se realizará por grupos a través del campus virtual por medio de un **enlace github**, teniendo como límite el comienzo de la siguiente sesión práctica de cada grupo. Dichos cuadernos **no deben contener celdas que no sean de interés para la resolución de las tareas**. Durante la siguiente sesión práctica cada grupo, en orden aleatorio, presentará y defenderá el resultado al profesor responsable de la práctica. De forma genérica, para todas las prácticas, el repositorio github debe incluir un **archivo README** describiendo el trabajo realizado, identificando la **autoría**, además de incluir **referencia a todas las fuentes que hayan sido utilizadas** de alguna forma en el desarrollo de la práctica, e indicar si la ejecución del cuaderno requiere alguna instalación adicional. Será adecuado que el o los cuadernos estén también comentados indicando el propósito de las distintas celdas presentadas como resolución de la tarea o tareas solicitadas.
-
-**De cara a todas las entregas**, cada práctica se valora de 0 a 5:
-- No entregado (0) 
-- deficiente (1-2)
-- cumple estrictamente lo solicitado (3)
-- calidad documentación, código y ampliaciones sobre las tareas solicitadas (4-5)
-
-
-***
-Bajo licencia de Creative Commons Reconocimiento - No Comercial 4.0 Internacional
+Para esta tarea he partido del ejercicio anterior, donde se dividía la cámara en 4 y se hacia un pop art, y lo que he hecho, ya que no tengo mucha idea de arte, es preguntarle a gemini, que colores que debería quitar en RGB, para crear un arte pop estilo Andy Warhol, luego a partir de ahi, me puse a experimentar por mi cuenta, y deje los que mas me llamaron la atención.
+https://share.gemini.google/89cG0qgdAZgJ
