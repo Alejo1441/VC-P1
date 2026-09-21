@@ -1,7 +1,7 @@
 ## Práctica 1. 
 
 
-### TAREA1 :Sin herramientas de IA, crea una imagen, p.e. de 800x800 píxeles, con la textura del tablero de ajedrez. Una vez resuelto de forma manual, resuelve la misma tarea usando un asistente de IA de tu elección (Claude, ChatGPT, Copilot, etc.). Compara ambas versiones en el informe de la práctica.
+### TAREA 1: Sin herramientas de IA, crea una imagen, p.e. de 800x800 píxeles, con la textura del tablero de ajedrez. Una vez resuelto de forma manual, resuelve la misma tarea usando un asistente de IA de tu elección (Claude, ChatGPT, Copilot, etc.). Compara ambas versiones en el informe de la práctica.
 
 Para la primera tarea lo que se ha realizado es lo siguiente:
 
@@ -16,12 +16,12 @@ Para la primera tarea lo que se ha realizado es lo siguiente:
 - pintamos todo el tablero por ultimo
 
 
-### TAREA 1 CON IA
+### TAREA 1: CON IA
 
 la diferencia básicamente es que, lo que yo he realizado con un bucle for, Gemini en este caso, lo realiza directamente al crear un tablero y modifica las filas y 
 columnas para pintar directamente ( no tengo captura de gemini para este ejercicio)
 
-### TAREA 1 conclusión
+### TAREA 1: conclusión
 
 Gemini, en este caso, lo realiza de forma más elegante y sin ningún bucle for, a esto se le conoce como indexación con saltos, según gemini, y con interpolation
 'nearest' también hace que los bordes no se difuminen y se vean mas nítidos
@@ -36,7 +36,7 @@ suficiente entre ellos
 
 
 
-### TAREA 3 Pintar círculos en las posiciones del píxel más claro y oscuro de cada fotograma captado por la cámara. ¿Funciona de forma fluida o a saltos? En el segundo caso, ¿podrías acelerarlo? Si haces uso de herramientas de IA, incluye la conversación.
+### TAREA 3: Pintar círculos en las posiciones del píxel más claro y oscuro de cada fotograma captado por la cámara. ¿Funciona de forma fluida o a saltos? En el segundo caso, ¿podrías acelerarlo? Si haces uso de herramientas de IA, incluye la conversación.
 
 para este ejercicio, me he fijado en otros ejercicios que ya estaban y he reutilizado una parte, ya que lo que hago en este ejercicio es bastante simple, recorro 
 todos los pixeles de la pantalla con un doble bucle for, y en cada pixel saco el numero de los colores que tienen en RGB, y luego los sumo en una variable brillo,
@@ -49,7 +49,7 @@ y no realizo ningún cambio al mio, ya que fue lo que se me ocurrió hacer a mi,
 
 
 
-### TAREA 4:TAREA: Llevar a cabo una propuesta propia de pop art. Incluye fuentes consultadas. Si haces uso de herramientas de IA, incluye la conversación.
+### TAREA 4: Llevar a cabo una propuesta propia de pop art. Incluye fuentes consultadas. Si haces uso de herramientas de IA, incluye la conversación.
 
 Para esta tarea he partido del ejercicio anterior, donde se dividía la cámara en 4 y se hacia un pop art, y lo que he hecho, ya que no tengo mucha idea de arte, es preguntarle a gemini, que colores que debería quitar en RGB, para crear un arte pop estilo Andy Warhol, luego a partir de ahi, me puse a  experimentar por mi cuenta, y deje los que mas me llamaron la atención.
 https://share.gemini.google/89cG0qgdAZgJ
